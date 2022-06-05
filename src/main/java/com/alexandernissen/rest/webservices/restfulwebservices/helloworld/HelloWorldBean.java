@@ -1,4 +1,4 @@
-package com.alexandernissen.rest.webservices.restfulwebservices;
+package com.alexandernissen.rest.webservices.restfulwebservices.helloworld;
 
 // Definition of Java bean
 // 1. Private properties/field with getters and setters
