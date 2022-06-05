@@ -13,16 +13,20 @@ public class HelloWorldController {
   // Alternatively: @GetRequest(method = RequestMethod.GET, path = "/hello-world")
   @GetMapping(path = "/hello-world")
   public String HelloWorld() {
-    return "Hello, World!";
+    return "Hello from the backend, World!";
   }
 
   @GetMapping(path = "/hello-world-bean")
   public HelloWorldBean HelloWorldBean() {
-    return new HelloWorldBean("Hello, World!");
+    return new HelloWorldBean("Hello from the backend, BeanWorld!");
   }
 
   @GetMapping(path = "hello-world/path-variable/{name}")
   public HelloWorldBean helloWorldPathVariable(@PathVariable String name) {
-    return new HelloWorldBean(String.format("Hello, %s", name));
+    if (name.equals("Error")) {
+      throw new RuntimeException("An error was thrown from the server!");
+    } else {
+      return new HelloWorldBean(String.format("Hello from the backend, %s", name));
+    }
   }
 }
