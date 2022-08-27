@@ -24,7 +24,12 @@ public class TodoResource {
   
   @GetMapping(path = "/users/{username}/todos")
   public List<Todo> getAllTodos(@PathVariable String username) {
-    return todoService.findAll();
+      return todoService.findAll();
+  }
+
+  @GetMapping(path = "/users/{username}/todos/{id}")
+  public Todo getTodo(@PathVariable String username, @PathVariable long id) {
+      return todoService.findById(id);
   }
 
   @DeleteMapping(path = "/users/{username}/todos/{id}")
