@@ -1,4 +1,4 @@
-package com.alexandernissen.rest.webservices.restfulwebservices;
+package com.alexandernissen.rest.basic.auth;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
