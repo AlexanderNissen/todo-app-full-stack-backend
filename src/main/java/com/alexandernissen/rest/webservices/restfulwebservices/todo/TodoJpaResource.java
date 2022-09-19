@@ -25,4 +25,35 @@ public class TodoJpaResource {
   public Todo getTodo(@PathVariable String username, @PathVariable long id) {
       return todoJpaRepository.findById(id).get();
   }
+
+  @DeleteMapping(path = "/jpa/users/{username}/todos/{id}")
+  public ResponseEntity<Void> updateTodo(@PathVariable String username, @PathVariable long id) {
+      todoJpaRepository.deleteById(id);
+      return ResponseEntity.noContent().build();
+  }
+
+  @PutMapping("/jpa/users/{username}/todos/{id}")
+  public ResponseEntity<Todo> createTodo(
+          @PathVariable String username,
+          @PathVariable long id,
+          @RequestBody Todo todo) {
+      todo.setUsername(username);
+      Todo todoUpdates = todoJpaRepository.save(todo);
+      return new ResponseEntity<Todo>(todo, HttpStatus.OK);
+  }
+
+  @PostMapping("jpa/users/{username}/todos")
+  public ResponseEntity<Void> createTodo(
+          @PathVariable String username,
+          @RequestBody Todo todo) {
+      todo.setUsername(username);
+      Todo createdTodo = todoJpaRepository.save(todo);
+
+      URI uri = ServletUriComponentsBuilder
+              .fromCurrentRequest()
+              .path("/{id}")
+              .buildAndExpand(createdTodo.getId()).toUri();
+
+      return ResponseEntity.created(uri).build();
+  }
 }
